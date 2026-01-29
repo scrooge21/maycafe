@@ -1,0 +1,143 @@
+/* Анимация спиннера */
+@keyframes spin { 100% { transform: rotate(360deg); } }
+
+/* --- ЗАГРУЗКА --- */
+#loading-screen {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-color: var(--bg);
+    z-index: 9999;
+    display: flex; justify-content: center; align-items: center;
+    transition: opacity 0.5s ease-out, visibility 0.5s;
+}
+.loader-logo {
+    width: 140px; height: 140px;
+    object-fit: contain;
+    animation: pulse 1.5s infinite ease-in-out;
+}
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* --- HEADER --- */
+.fixed-header-wrapper {
+    position: fixed; top: 0; left: 0; width: 100%; z-index: 80;
+    pointer-events: none; 
+}
+.main-header { padding: 0; margin-bottom: 0; pointer-events: auto; }
+
+.banner-content {
+    /* Базовый градиент (если нет фото) */
+    background: linear-gradient(120deg, #ff9eb5, #ff6b96);
+    
+    /* Настройки для фонового изображения */
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    
+    border-radius: 0 0 25px 25px; 
+    color: white; 
+    position: relative; 
+    overflow: hidden;
+    padding: 15px 20px;
+    box-shadow: 0 8px 20px rgba(255, 107, 150, 0.3);
+    
+    /* Плавный переход при смене фона */
+    transition: background-image 0.3s ease;
+}
+
+/* Затемняющий слой (Overlay) - виден, когда есть класс has-bg */
+.banner-content::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* Полупрозрачный черный слой */
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
+
+.banner-content.has-bg::before {
+    opacity: 1;
+}
+
+/* Контент баннера должен быть выше затемнения */
+.banner-row { 
+    display: flex; 
+    align-items: center; 
+    gap: 15px; 
+    position: relative; 
+    z-index: 2; /* Выше overlay */
+}
+
+.banner-logo-img {
+    height: 55px; width: auto; object-fit: contain;
+    filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.25));
+    transform: rotate(-5deg);
+}
+
+.banner-text-info { display: flex; flex-direction: column; justify-content: center; }
+
+/* Тень текста усилена для читаемости на фото */
+.banner-text-info h1 { margin: 0; font-size: 22px; font-weight: 800; line-height: 1.1; text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
+.banner-text-info p { margin: 2px 0 0 0; opacity: 0.95; font-size: 13px; font-weight: 600; letter-spacing: 0.3px; text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
+
+.banner-deco {
+    position: absolute; right: -10px; bottom: -20px;
+    font-size: 80px; opacity: 0.2; transform: rotate(-10deg); 
+    pointer-events: none; 
+    z-index: 1; /* Под текстом, но над фоном (или под overlay, если z-index < 1) */
+}
+
+/* --- SWIPER --- */
+.swiper-container {
+    display: flex;
+    width: 400%; 
+    height: 100vh;
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: transform;
+}
+
+.tab-content {
+    width: 25%; 
+    height: 100%;
+    overflow-y: auto;
+    padding-bottom: 90px;
+    box-sizing: border-box;
+    display: block !important;
+    opacity: 1 !important;
+}
+
+/* --- BOTTOM NAV --- */
+.bottom-nav { 
+    position: fixed; bottom: 0; width: 100%; background: var(--card); 
+    display: flex; justify-content: space-around; padding: 12px 0 25px 0; 
+    border-top: 1px solid var(--border); z-index: 90; 
+    transition: transform 0.3s;
+}
+.bottom-nav.hidden { transform: translateY(100%); }
+
+.nav-item { color: var(--gray); display: flex; align-items: center; justify-content: center; width: 50px; height: 40px; transition: 0.2s; }
+.nav-item.active { color: var(--primary-dark); transform: translateY(-2px); }
+.nav-item span { font-size: 28px; }
+
+/* Градиент с сердечками внизу ленты */
+.heart-gradient-footer {
+    height: 120px; /* Размер как у баннера */
+    width: 100%;
+    background: linear-gradient(to top, var(--bg) 20%, transparent 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    opacity: 0.6;
+    font-size: 24px;
+    letter-spacing: 15px;
+    pointer-events: none;
+}
+.heart-gradient-footer::after {
+    content: "💖 🧡 💛";
+    filter: grayscale(0.3);
+}

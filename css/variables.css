@@ -1,0 +1,36 @@
+:root {
+    /* Основные цвета */
+    --primary: #ff9eb5;      
+    --primary-dark: #ff6b96; 
+    --bg: #fff0f5;           
+    --card: #ffffff;         
+    --text: #2c2528;         
+    --gray: #9e9e9e;
+    --border: #f0e6ea;       
+    --btn-text: #ffffff;     
+    --btn-bg: #2c2528;       
+    
+    /* Доп цвета */
+    --story-bg: #f2f2f2;
+}
+
+body.dark-mode {
+    --primary: #ff8fab;
+    --primary-dark: #ffb3c6;
+    --bg: #121212;
+    --card: #1e1e1e;
+    --text: #ffffff;
+    --gray: #bbb;
+    --border: #333;
+    --btn-text: #1e1e1e;
+    --btn-bg: #ffffff; 
+    --story-bg: #2c2c2c;      
+}
+
+body {
+    font-family: 'Manrope', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg); color: var(--text);
+    margin: 0; padding: 0;
+    -webkit-tap-highlight-color: transparent; user-select: none;
+    overflow: hidden; 
+}

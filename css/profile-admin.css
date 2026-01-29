@@ -1,0 +1,369 @@
+/* --- PROFILE --- */
+.profile-header { 
+    padding: 25px 20px; 
+    display: flex; 
+    align-items: center; 
+    gap: 20px; 
+}
+
+.avatar-img { 
+    width: 80px; 
+    height: 80px; 
+    border-radius: 50%; 
+    object-fit: cover; 
+    border: 3px solid var(--primary); 
+    cursor: pointer; 
+}
+
+.user-status {
+    cursor: pointer; 
+    display: flex; 
+    align-items: center; 
+    gap: 8px;
+    padding: 6px 10px; 
+    border-radius: 10px; 
+    transition: background 0.2s;
+    margin: 8px 0 0 0; 
+    background: var(--card); 
+    border: 1px solid var(--border);
+    font-size: 13px; 
+    width: fit-content;
+}
+.user-status:active { opacity: 0.7; }
+
+.settings-list { padding: 0 15px; }
+
+.setting-item {
+    background: var(--card); 
+    padding: 18px; 
+    border-radius: 16px;
+    display: flex; 
+    align-items: center; 
+    margin-bottom: 10px; 
+    gap: 12px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.02); 
+    border: 1px solid var(--border); 
+    cursor: pointer;
+}
+
+/* Switch Toggle */
+.switch { position: relative; display: inline-block; width: 44px; height: 24px; margin-left: auto; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider {
+    position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #ccc; border-radius: 24px; transition: .4s;
+}
+.slider:before {
+    position: absolute; content: ""; height: 20px; width: 20px; left: 2px; bottom: 2px;
+    background-color: white; border-radius: 50%; transition: .4s;
+}
+input:checked + .slider { background-color: var(--primary); }
+input:checked + .slider:before { transform: translateX(20px); }
+
+
+/* --- ADMIN BUTTON (FAB) --- */
+.admin-fab {
+    position: fixed; 
+    bottom: 85px; 
+    left: 15px;
+    background: var(--card); 
+    color: var(--primary-dark);
+    border: 1px solid rgba(255, 107, 150, 0.4); 
+    width: 48px; 
+    height: 48px; 
+    border-radius: 50px; 
+    display: none; 
+    align-items: center; 
+    justify-content: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); 
+    cursor: pointer; 
+    z-index: 2099; 
+    transition: transform 0.2s;
+}
+.admin-fab:active { transform: scale(0.90); }
+
+
+/* --- ADMIN PANEL (PRODUCT EDITOR) --- */
+.admin-overlay { 
+    display: none; position: fixed; top:0; left:0; width:100%; height:100%; 
+    background:rgba(0,0,0,0.6); 
+    /* Z-INDEX ПОВЫШЕН до 2200, чтобы перекрыть FAB (2099) и Корзину (2100) */
+    z-index: 2200; 
+    justify-content:center; align-items:center; 
+    backdrop-filter: blur(4px); 
+}
+
+.admin-card {
+    background: var(--card); width: 85%; max-width: 400px; max-height: 90vh;
+    border-radius: 25px; padding: 0; display: flex; flex-direction: column;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3); overflow: hidden;
+}
+
+.admin-card-header {
+    padding: 15px 20px; display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 1px solid var(--border); background: var(--bg);
+}
+
+/* --- CLOSE BUTTON STYLED --- */
+.close-btn-styled {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    font-size: 18px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    line-height: 0;
+}
+.close-btn-styled:hover { background: var(--border); }
+
+/* --- BANNER EDIT BUTTON --- */
+.admin-banner-edit {
+    position: absolute; top: 10px; right: 10px;
+    background: rgba(0,0,0,0.3); color: white;
+    width: 30px; height: 30px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 10;
+    backdrop-filter: blur(4px);
+    pointer-events: auto;
+}
+.admin-banner-edit span { font-size: 16px; }
+
+.admin-scroll-area { padding: 20px; overflow-y: auto; }
+
+/* --- COMPACT INPUTS --- */
+.input-group { margin-bottom: 10px; }
+.input-group label { display: block; font-size: 11px; color: var(--gray); margin-bottom: 3px; font-weight: 600; margin-left: 5px; }
+.input-group.half { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+input, textarea, .admin-select { 
+    padding: 10px 12px; 
+    border-radius: 10px; 
+    border: 1px solid var(--border); 
+    background: var(--bg); 
+    color: var(--text); 
+    width: 100%; 
+    box-sizing: border-box; 
+    font-size: 14px; 
+    outline: none; 
+    transition: 0.2s; 
+    font-family: inherit;
+}
+input:focus, textarea:focus { border-color: var(--primary); background: var(--card); }
+textarea { resize: none; }
+
+.admin-upload-box {
+    border: 2px dashed var(--gray); border-radius: 10px; padding: 12px;
+    text-align: center; color: var(--gray); cursor: pointer; display: flex; 
+    flex-direction: column; align-items: center; gap: 5px; background: var(--bg);
+}
+.admin-upload-box.uploaded { border-color: #4CAF50; color: #4CAF50; background: rgba(76, 175, 80, 0.05); }
+
+.admin-actions { padding: 20px; display: flex; gap: 10px; background: var(--bg); }
+.save-btn { background: var(--primary-dark); color: white; padding: 14px; border: none; border-radius: 15px; flex: 1; font-weight: bold; font-size: 16px; }
+body.dark-mode .save-btn {
+    color: #1e1e1e; /* Делаем текст темным, чтобы он читался на розовом */
+}
+.delete-btn { background: #ff4444; color: white; padding: 14px; border: none; border-radius: 15px; width: 50px; display: flex; justify-content: center; align-items: center;}
+
+
+/* --- ADMIN ORDERS CONTROLS --- */
+.admin-orders-controls {
+    padding: 10px 20px;
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    position: sticky; 
+    top: 0;
+    z-index: 10;
+}
+
+.admin-search-input {
+    width: 100%; padding: 12px; border-radius: 12px;
+    border: 1px solid var(--border); background: var(--bg);
+    color: var(--text); outline: none; font-size: 15px;
+    margin-bottom: 10px; box-sizing: border-box;
+}
+.admin-search-input:focus { border-color: var(--primary); }
+
+.admin-filter-scroll {
+    display: flex; gap: 8px; overflow-x: auto;
+    padding-bottom: 5px; scrollbar-width: none; 
+}
+.admin-filter-scroll::-webkit-scrollbar { display: none; }
+
+.filter-chip {
+    padding: 8px 14px; border-radius: 20px;
+    background: var(--bg); border: 1px solid var(--border);
+    font-size: 13px; white-space: nowrap; cursor: pointer;
+    font-weight: 600; color: var(--gray); transition: 0.2s;
+}
+.filter-chip.active {
+    background: var(--text); color: var(--bg); border-color: var(--text);
+}
+
+.admin-card-actions {
+    margin-top: 10px; display: flex; gap: 8px; 
+    overflow-x: auto; padding-bottom: 5px; scrollbar-width: none;
+}
+.admin-card-actions::-webkit-scrollbar { display: none; }
+
+
+/* --- NEW STATISTICS DASHBOARD --- */
+.stats-wrapper { 
+    padding: 20px; 
+    overflow-y: auto; 
+    padding-bottom: 50px; 
+}
+
+.stats-title { 
+    margin: 10px 0 15px 0; 
+    font-size: 14px; 
+    text-transform: uppercase; 
+    color: var(--gray); 
+    font-weight: 700; 
+    letter-spacing: 0.5px; 
+}
+
+/* Сетка карточек 2x2 */
+.stats-grid { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 10px; 
+    margin-bottom: 15px; 
+}
+
+.stat-box {
+    background: var(--card); 
+    border: 1px solid var(--border);
+    border-radius: 16px; 
+    padding: 15px; 
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+}
+
+.stat-val { 
+    font-size: 22px; 
+    font-weight: 800; 
+    color: var(--text); 
+    margin-bottom: 4px; 
+}
+.stat-val.good { color: #4CAF50; }
+
+.stat-label { 
+    font-size: 11px; 
+    color: var(--gray); 
+    font-weight: 600; 
+}
+
+/* Большая карточка выручки */
+.stats-big-card {
+    background: var(--card); 
+    border: 1px solid var(--border);
+    border-radius: 20px; 
+    padding: 20px; 
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+}
+
+.stat-row { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    margin-bottom: 15px; 
+}
+
+.big-num { 
+    font-size: 24px; 
+    font-weight: 800; 
+    color: var(--primary-dark); 
+}
+
+.stat-divider { 
+    height: 1px; 
+    background: var(--border); 
+    margin: 10px 0; 
+}
+
+.stat-row-mini { 
+    display: flex; 
+    justify-content: space-around; 
+    text-align: center; 
+}
+
+.mini-val { display: block; font-size: 18px; font-weight: 700; }
+.mini-lbl { font-size: 11px; color: var(--gray); }
+
+/* Графики (Charts) */
+.chart-container { 
+    margin-bottom: 20px; 
+    background: var(--card); 
+    padding: 15px; 
+    border-radius: 16px; 
+    border: 1px solid var(--border); 
+}
+
+.chart-label { 
+    font-size: 13px; 
+    font-weight: 700; 
+    margin-bottom: 10px; 
+    display: flex; 
+    justify-content: space-between; 
+}
+
+.progress-bg { 
+    height: 8px; 
+    background: var(--bg); 
+    border-radius: 4px; 
+    overflow: hidden; 
+}
+.progress-fill { 
+    height: 100%; 
+    border-radius: 4px; 
+    transition: width 1s ease-out; 
+}
+.progress-fill.primary { background: var(--primary); }
+
+.stacked-bar { 
+    display: flex; 
+    height: 10px; 
+    border-radius: 5px; 
+    overflow: hidden; 
+    margin-bottom: 10px; 
+    background: var(--bg); 
+}
+.sb-seg { height: 100%; transition: width 1s ease; }
+.sb-seg.success { background: #4CAF50; }
+.sb-seg.warning { background: #FFC107; }
+.sb-seg.danger { background: #ff4444; }
+
+.chart-legend { 
+    display: flex; 
+    gap: 15px; 
+    font-size: 11px; 
+    color: var(--gray); 
+    justify-content: center; 
+}
+.chart-legend div { display: flex; align-items: center; gap: 5px; }
+
+.dot { width: 8px; height: 8px; border-radius: 50%; }
+.dot.success { background: #4CAF50; }
+.dot.warning { background: #FFC107; }
+.dot.danger { background: #ff4444; }
+
+/* --- BANNER CROPPER --- */
+.crop-area-wrapper {
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+}
+
+/* Стилизация CropperJS под темную тему */
+.cropper-bg {
+    background-image: none;
+    background-color: #1a1a1a;
+}
+.cropper-modal {
+    background-color: #000;
+    opacity: 0.8;
+}
